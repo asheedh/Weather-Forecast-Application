@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./wfad.html"],
+  content: ["./wfad.html","./wfad.js"],
   theme: {
     extend: {},
   },
