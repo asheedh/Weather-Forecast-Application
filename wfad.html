@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="output.css">
+
     <script src="wfad.js" defer></script>
+    <link rel="stylesheet" href="output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 
     <title> Weather Forecast Application Development </title>
 </head>
 <body>
     <h1>Weather Forecast</h1>
-    <div class="border-black border-2 rounded-xl w-90% bg-gradient-to-br from-blue-400 to-blue-800 md:p-5">1
-        <div class="md:border-black md:border-2 grid lg:grid-flow-col md:p-4 lg:gap-x-5 gap-y-5 p-2">2
+    <div class="border-black border-2 rounded-xl w-90% bg-gradient-to-br from-blue-400 to-blue-800 md:p-5">
+        <div class="md:border-black md:border-2 grid lg:grid-flow-col md:p-4 lg:gap-x-5 gap-y-5 p-2">
 
             <div class="md:border-2 md:border-black p-2 flex flex-col gap-5">
 
                 <form class="lg:flex p-1 items-center bg-white flex justify-between border-2 rounded-xl lg:mt-2">
-                    <input type="text" id="city" placeholder="   Enter city Name" spellcheck="false" class="w-5/6">
-                    <button id='search'><i class="fas fa-search"></i></button>
+                    <input type="text" id="city" placeholder="   Enter city Name" spellcheck="false" class="w-5/6" required>
+                    <button id='search' type ="submit"><i class="fas fa-search"></i></button>
                 </form>
 
-                <div class="w-80 h-48 flex flex-col gap-5 jsutify-center items-center p-2 bg-amber-200">
+                <div class="w-80 h-48 flex flex-col gap-5 jsutify-center items-center p-2 bg-amber-200 rounded-xl">
                     <div  id="content" class="text-3xl">
 
                     </div>
@@ -34,23 +34,68 @@
                 </div>
 
                 <div class="w-80 h-80 flex flex-wrap gap-3 p-2">
-                    <div id="humidity" class="border-black border-2 rounded-xl w-36 h-36 items-center flex justify-center p-2 bg-green-200"> <i class="wi wi-humidity text-xl"></i></div>
-                    <div id="wind" class="border-black border-2 rounded-xl w-36 h-36 items-center flex justify-center p-2 bg-green-200"> <i class="wi wi-strong-wind text-xl"></i></div>
-                    <div id="location" class="border-black border-2 rounded-xl w-36 h-36 items-center flex justify-center p-2 bg-green-200"> <i class="fas fa-globe text-xl"></i></div>
+
+                    <div class="border-black border-2 rounded-xl w-36 h-36 p-2 bg-green-200">  
+                        <div>
+                            <i class="wi wi-humidity text-xl"></i>
+                        </div>
+                        <div id="humidity" class="text-2xl">
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="border-black border-2 rounded-xl w-36 h-36 p-2 bg-green-200"> 
+                        <div class="flex items-start">
+                            <i class="wi wi-strong-wind text-xl"></i>
+                        </div>
+                        <div id="wind" class="text-2xl">
+
+                        </div>
+                        
+                    </div>
+                    <div class="border-black border-2 rounded-xl w-36 h-36 p-2 bg-green-200">  
+                        <div>
+                            <i class="fas fa-globe text-xl"></i>
+                        </div>
+                        <div id="location">
+
+                        </div>
+                        
+                    </div>
                     <div class="border-black border-2 rounded-xl w-36 h-36 items-center flex justify-center p-2 bg-green-200"></div>
                 </div>
 
             </div>
 
-            <div class="flex gap-4 justify-between flex-wrap">5
-                <div class="border-2 border-black lg:w-80 w-36 h-60 lg:h-96 rounded-xl p-4"></div>
-                <div class="border-2 border-black lg:w-80 w-36 h-60 lg:h-96 rounded-xl p-4">Monday</div>
-                <div class="border-2 border-black lg:w-80 w-36 h-60 lg:h-96 rounded-xl p-4">Tuesday</div>
-                <div class="border-2 border-black lg:w-80 w-36 h-60 lg:h-96 rounded-xl p-4">wednesday</div>
-                <div class="border-2 border-black lg:w-80 w-36 h-60 lg:h-96 rounded-xl p-4">Thursday</div>
-                <div class="border-2 border-black lg:w-80 w-36 h-60 lg:h-96 rounded-xl p-4">Friday</div>
-                <div class="border-2 border-black lg:w-80 w-36 h-60 lg:h-96 rounded-xl p-4">Saturday</div>
-                <div class="border-2 border-black lg:w-80 w-36 h-60 lg:h-96 rounded-xl p-4">Sunday</div>
+            <div class="flex gap-4 justify-stretch flex-wrap">
+                <div id="d1" class="border-2 border-black lg:w-48 w-36 h-60 lg:h-80 rounded-xl p-4">
+                    <!-- Weather Forecast data will be displayed here -->
+                </div>
+
+                <div id="d2" class="border-2 border-black lg:w-48 w-36 h-60 lg:h-80 rounded-xl p-4">
+                    <!-- Weather Forecast data will be displayed here -->
+                </div>
+
+                <div id="d3" class="border-2 border-black lg:w-48 w-36 h-60 lg:h-80 rounded-xl p-4">
+                    <!-- Weather Forecast data will be displayed here -->
+                </div>
+
+                <div id="d4" class="border-2 border-black lg:w-48 w-36 h-60 lg:h-80 rounded-xl p-4">
+                    <!-- Weather Forecast data will be displayed here -->
+                </div>
+
+                <div id="d5" class="border-2 border-black lg:w-48 w-36 h-60 lg:h-80 rounded-xl p-4">
+                    <!-- Weather Forecast data will be displayed here -->
+                </div>
+
+                <div id="d6" class="border-2 border-black lg:w-48 w-36 h-60 lg:h-80 rounded-xl p-4">
+                    <!-- Weather Forecast data will be displayed here -->
+                </div>
+
+                <div id="d7" class="border-2 border-black lg:w-48 w-36 h-60 lg:h-80 rounded-xl p-4">
+                    <!-- Weather Forecast data will be displayed here -->
+                </div>
             </div>
 
         </div>
