@@ -1,3 +1,12 @@
+.cards{
+ @apply border-2 border-black lg:w-52 w-36 h-60 lg:h-72 rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl hover:cursor-pointer animate-slide-up
+ 
+}
+
+.subcard{
+    @apply p-2 transform transition-transform duration-300 hover:scale-105 hover:cursor-pointer
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
