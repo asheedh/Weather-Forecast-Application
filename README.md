@@ -7,7 +7,9 @@ Introduction: This is a simple and responsive weather forecast application built
 
 Features: Displays current weather and 7-day forecast for any city. Geolocation-based weather information on page load. Dynamic background that changes with the weather. Caches recent searches in sessionStorage and suggests recent cities while typing. Handles invalid city inputs with error messages.
 
-Setup Instructions: 1.Clone the Repository: git clone https://github.com/asheedh/Weather-Forecast-Application.git
+Setup Instructions: 
+
+1.Clone the Repository: git clone https://github.com/asheedh/Weather-Forecast-Application.git
 
 2.Navigate to the Project Directory: cd weather-app
 
