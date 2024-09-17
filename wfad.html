@@ -12,21 +12,38 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
 
     <title> Weather Forecast Application Development </title>
+<!-- Menu/Navigation -->
+
+    <div class="flex justify-center bg-black ">
+        <div class="md:flex gap-6 items-center p-2">
+            <button id="forecastbtn"><a class="text-sm text-white hover:text-orange-400 p-4">Forecast</a></button>
+            <button id="hideforecastbtn"><a class="text-sm text-white hover:text-orange-400 p-4">Hide Forecast</a></button>
+            <button><a id="searchbtn" class="text-sm text-white hover:text-orange-400 p-4">search</a></button>
+            <a href="#contact" class="text-sm text-white hover:text-orange-400 p-4">Contact</a>
+        </div>
+    </div>
+    
+<!-- Menu/Navigation -->
 
 </head>
-<body class="bg-gradient-to-br from-orange-700 to-blue-700">
-    
-    <div>
-        <div class=" grid md:grid-cols-2 grid-cols-1 md:p-4 lg:gap-x-5 gap-y-2 p-2">
 
-            <div id="mainCard" class="md:border-2 md:border-black p-2 flex flex-col gap-5 justify-evenly rounded-xl font-lato">
-
-                <div class="flex justify-center">
-                    <form class="ml-3 lg:flex p-1 items-center bg-white flex justify-between border-2 rounded-xl w-96 transform transition-transform duration-300 hover:scale-105 hover:cursor-pointer">
-                        <input type="text" id="city" placeholder="   Enter city Name" spellcheck="false" class="w-5/6" required>
+<body id="body">
+    <div class="p-2">
+        <div class=" grid lg:grid-cols-2 grid-cols-1 md:p-4 lg:gap-x-5 gap-y-2 p-2 md:h-screen">
+            <div id="mainCard" class="md:border-2 md:border-black lg:p-2 md:p-4 flex flex-col md:justify-evenly rounded-xl font-lato items-center ">
+                <!-- search field -->
+                <div id="form" class="flex justify-center flex-col p-5 ">
+                    <form class="lg:flex p-1 items-center bg-white flex justify-between border-2 rounded-xl md:w-96 w-80  transform transition-transform duration-300 hover:scale-105 hover:cursor-pointer">
+                        <input type="text" id="city" placeholder="  Enter city Name" spellcheck="false" class="w-5/6">
                         <button id='search' type ="submit"><i class="fas fa-search mr-2"></i></button>
                     </form>
+                    <!-- Suggestion drop down -->
+                    <div id="suggestionsContainer" class="relative bg-white shadow-lg rounded-lg hidden"> 
+                        <ul id="suggestions" class="absolute bg-white shadow-lg rounded-lg "></ul>          
+                    </div>
                 </div>
+
+                <!-- Search Results like city, temparature and condtion -->
 
                 <div class="flex flex-col gap-5 justify-center items-center p-4 transform transition-transform duration-300 hover:scale-105 hover:cursor-pointer">
                     <div  id="content" class="text-4xl">
@@ -41,13 +58,13 @@
                     
                 </div>
 
-                <div class="flex gap-4 p-5 justify-evenly ">
+                <div class="flex md:gap-x-6 justify-evenly p-4">
 
                     <div class="subcard">  
                         <div>
-                            <i class="wi wi-humidity text-3xl"></i>
+                            <i class="wi wi-humidity"></i>
                         </div><br>
-                        <div id="humidity" class="text-3xl">
+                        <div id="humidity">
 
                         </div>
                         
@@ -55,26 +72,26 @@
 
                     <div class="subcard "> 
                         <div class="flex items-start">
-                            <i class="wi wi-strong-wind text-3xl"></i>
+                            <i class="wi wi-strong-wind"></i>
                         </div><br>
-                        <div id="wind" class="text-3xl">
+                        <div id="wind">
 
                         </div>
                         
                     </div>
                     <div class="subcard">  
                         <div>
-                            <i class="fas fa-globe text-3xl"></i>
+                            <i class="fas fa-globe"></i>
                         </div><br>
-                        <div id="location" class="text-3xl">
+                        <div id="location">
 
                         </div>    
                     </div>
                 </div>
-
+                 <!--  End of Search Results like city, temparature and condtion -->
             </div>
 
-            <div class="flex gap-4 justify-stretch flex-wrap font-montserrat text-sm">
+            <div id="forecast" class="flex md:gap-x-6 gap-2 md:gap-y-4 md:justify-stretch flex-wrap font-montserrat text-xs">
                 <div id="d1" class="cards">
                     <!-- Weather Forecast data will be displayed here -->
                 </div>
@@ -109,4 +126,27 @@
     </div>
     
 </body>
+<footer class="bg-gray-900 text-white py-6 lg:mt-10">
+    <div class="max-w-screen-xl mx-auto px-4 flex justify-between items-center">
+        
+        <!-- Left side (Name or Logo) -->
+        <div>
+            <h1 class="text-lg font-semibold">Weather Forecast App</h1>
+            <p class="text-sm">Your trusted weather source.</p>
+        </div>
+
+        <!-- Right side (Social Media Icons) -->
+        <div id="contact" class="flex gap-4">
+            <a href="https://www.facebook.com/" class="text-gray-300 hover:text-orange-400"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.twitter.com" class="text-gray-300 hover:text-orange-400"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com" class="text-gray-300 hover:text-orange-400"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/azeez-saginala-8a11b7266/" class="text-gray-300 hover:text-orange-400"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center text-sm text-gray-400">
+        © 2024 Weather Forecast App. All Rights Reserved.
+    </div>
+</footer>
+
 </html>
