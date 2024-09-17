@@ -23,6 +23,7 @@ const showForecast = document.querySelector("#forecast");
 const showForecastbtn = document.querySelector("#forecastbtn");
 const hideForecastbtn = document.querySelector("#hideforecastbtn");
 const mbody = document.querySelector("#body");
+const currentLocation = document.querySelector("#btnLocation");
 
 const APIkey = "e1cfcbdeb8634f3b94862203241309";
 const URL = "https://api.weatherapi.com/v1/forecast.json?";
@@ -54,7 +55,8 @@ content.innerHTML = `<div class="loader">Loading...</div>`;
 
 // Geolocation-based weather on initial load
 
-fetch("http://ip-api.com/json/")
+function liveLocation() {
+    fetch("http://ip-api.com/json/")
     .then(res => res.json())
     .then(data => {
         fetch(`${URL}key=${APIkey}&q=${data.lat},${data.lon}&days=8`)
@@ -69,6 +71,14 @@ fetch("http://ip-api.com/json/")
         console.error('Error fetching geolocation:', error);
         content.innerHTML = "Unable to get your location.";
     });
+}
+
+liveLocation();
+currentLocation.addEventListener('click',() => {
+    content.innerHTML = `<div class="loader">Loading...</div>`;
+    liveLocation();
+})
+
 
 // function for displaying weather
 
@@ -235,6 +245,7 @@ function displayFilteredSuggestions(cities) {
 // code for the functionality 
 search.addEventListener('click', (event) => {
     event.preventDefault();
+    content.innerHTML = `<div class="loader">Loading...</div>`;
     const city = searchField.value;
     const storedData = sessionStorage.getItem(city);
     searchField.value = '';
