@@ -56,10 +56,10 @@ content.innerHTML = `<div class="loader">Loading...</div>`;
 // Geolocation-based weather on initial load
 
 function liveLocation() {
-    fetch("http://ip-api.com/json/")
+    fetch("http://www.geoplugin.net/json.gp?")
     .then(res => res.json())
     .then(data => {
-        fetch(`${URL}key=${APIkey}&q=${data.lat},${data.lon}&days=8`)
+        fetch(`${URL}key=${APIkey}&q=${data.geoplugin_latitude},${data.geoplugin_longitude}&days=8`)
         .then(res => res.json())
         .then(position => {
             sessionStorage.setItem(data.city, JSON.stringify(position));
@@ -290,3 +290,28 @@ search.addEventListener('click', (event) => {
 
 // Update suggestions on page load
 window.onload = updateDropdown;
+
+
+// fetch("http://www.geoplugin.net/json.gp?")
+// .then(data => data.json())
+// .then( res => console.log(res))
+
+// function liveLocation() {
+//         fetch("http://www.geoplugin.net/json.gp?")
+//         .then(res => res.json())
+//         .then(data => {
+//             fetch(`${URL}key=${APIkey}&q=${data.geoplugin_latitude},${data.geoplugin_longitude}&days=8`)
+//             console.log()
+//             .then(res => res.json(data.geoplugin_latitude))
+//             .then(position => {
+//                 sessionStorage.setItem(data.city, JSON.stringify(position));
+//                 displayWeather(position);
+//             })
+//             .catch(error => console.error('Error fetching weather:', error));
+//         })
+//         .catch(error => {
+//             console.error('Error fetching geolocation:', error);
+//             content.innerHTML = "Unable to get your location.";
+//             console.log("not working")
+//         });
+//     }
