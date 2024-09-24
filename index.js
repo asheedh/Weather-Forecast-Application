@@ -56,10 +56,10 @@ content.innerHTML = `<div class="loader">Loading...</div>`;
 // Geolocation-based weather on initial load
 
 function liveLocation() {
-    fetch("http://www.geoplugin.net/json.gp?")
+    fetch("https://extreme-ip-lookup.com/json/?key=NsqPBZ1VB5InSuBUdUO8")
     .then(res => res.json())
     .then(data => {
-        fetch(`${URL}key=${APIkey}&q=${data.geoplugin_latitude},${data.geoplugin_longitude}&days=8`)
+        fetch(`${URL}key=${APIkey}&q=${data.lat},${data.lon}&days=8`)
         .then(res => res.json())
         .then(position => {
             sessionStorage.setItem(data.city, JSON.stringify(position));
