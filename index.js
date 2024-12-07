@@ -24,6 +24,7 @@ const showForecastbtn = document.querySelector("#forecastbtn");
 const hideForecastbtn = document.querySelector("#hideforecastbtn");
 const mbody = document.querySelector("#body");
 const currentLocation = document.querySelector("#btnLocation");
+let day;
 
 const APIkey = "e1cfcbdeb8634f3b94862203241309";
 const URL = "https://api.weatherapi.com/v1/forecast.json?";
@@ -80,40 +81,40 @@ currentLocation.addEventListener('click',() => {
 })
 
 
-// function for displaying weather
-
+// Display weather data
 function displayWeather(data) {
-    
-    function setBackground(condition) {  // For background images based on weather
+    if (!data || !data.forecast || !data.forecast.forecastday || !data.forecast.forecastday[0]) {
+        content.innerHTML = "Error fetching weather data. Please try again.";
+        return; // Exit the function if required properties are missing
+    }
+
+    function setBackground(condition) {
         const conditionLower = condition.toLowerCase();
         let backgroundUrl = '';
-    
+
         if (conditionLower.includes("sunny") || conditionLower.includes("clear")) {
             backgroundUrl = 'url(./assets/sunny.gif)';
-        } 
-        else if (conditionLower.includes("partly cloudy")) {
+        } else if (conditionLower.includes("partly cloudy")) {
             backgroundUrl = 'url(./assets/partlycloudy.gif)';
-        } 
-        else if (conditionLower.includes("cloudy") || conditionLower.includes("overcast")) {
+        } else if (conditionLower.includes("cloudy") || conditionLower.includes("overcast")) {
             backgroundUrl = 'url(./assets/cloudy.gif)';
-        } 
-        else if (conditionLower.includes("rain") || conditionLower.includes("thunderstorm")) {
+        } else if (conditionLower.includes("rain") || conditionLower.includes("thunderstorm")) {
             backgroundUrl = 'url(./assets/Thunderstorm.gif)';
-        } 
-        else if (conditionLower.includes("snow")) {
-            backgroundUrl = 'url(./assets/snow.gif)'; 
-        } 
-        else {
+        } else if (conditionLower.includes("snow")) {
+            backgroundUrl = 'url(./assets/snow.gif)';
+        } else {
             return 'background-image: url(./assets/weather.gif) background-size: cover;';
         }
-    
-        // Return the style property string
+
         return `background-image: ${backgroundUrl}; background-size: cover;`;
     }
-    mbody.style = setBackground(data.forecast.forecastday[0].day.condition.text);
+
+    const currentDay = data.forecast.forecastday[0];
+
+    // Set background based on the current weather condition
+    mbody.style = setBackground(currentDay.day.condition.text);
 
     // function for background of cards based on weather
-
     function getBackgroundColor(condition) {
         const conditionLower = condition.toLowerCase();
         if (conditionLower.includes("sunny") || conditionLower.includes("clear")) {
@@ -130,32 +131,32 @@ function displayWeather(data) {
             return 'linear-gradient(to top, #ffffff, #cccccc)';
         }
     }
-    
-    // Displaying values in web page
 
-    content.innerHTML = `<img src="https:${data.forecast.forecastday[0].day.condition.icon}"> City: ${data.location.name}`;
+    // Displaying values on the webpage
+    content.innerHTML = `<img src="https:${currentDay.day.condition.icon}"> City: ${data.location.name}`;
     temp.innerHTML = `<i class="wi wi-thermometer text-3xl"></i>${Math.round(data.current.temp_c)}°C`;
     humidity.innerHTML = `Humidity: ${data.current.humidity} %`;
-    windSpeed.innerHTML = `windSpeed: ${data.current.wind_kph} Kph`;
+    windSpeed.innerHTML = `Wind Speed: ${data.current.wind_kph} Kph`;
     location1.innerHTML = `Latitude: ${data.location.lat} <br> Longitude: ${data.location.lon}`;
-    condition.innerHTML = `${data.forecast.forecastday[0].day.condition.text}`;
+    condition.innerHTML = `${currentDay.day.condition.text}`;
 
-    // Function for iterating every day.
-
+    // Updating forecast days
     const days = [day1, day2, day3, day4, day5, day6, day7];
     days.forEach((day, index) => {
         const forecastingOf = data.forecast.forecastday[index + 1];
+        if (!forecastingOf) return; // Check if the forecast day exists
         day.innerHTML = `<img src="https:${forecastingOf.day.condition.icon}">
         <br> Forecast Date: <strong>${forecastingOf.date}</strong>
-        <br> Avg temp: <strong>${Math.round(forecastingOf.day.avgtemp_c)} °C </strong>
-        <br> Avg Wind speed: <strong>${forecastingOf.day.maxwind_kph} Kph </strong>
+        <br> Avg Temp: <strong>${Math.round(forecastingOf.day.avgtemp_c)} °C </strong>
+        <br> Max Wind: <strong>${forecastingOf.day.maxwind_kph} Kph </strong>
         <br> Avg Humidity: <strong>${forecastingOf.day.avghumidity} % </strong>
-        <br> Day's Condition: <strong>${forecastingOf.day.condition.text} </strong>`;
+        <br> Condition: <strong>${forecastingOf.day.condition.text} </strong>`;
         day.style.background = getBackgroundColor(forecastingOf.day.condition.text);
-        body.style.background = getBackgroundColor(data.forecast.forecastday[0].day.condition.text);
-        
     });
+
+    body.style.background = getBackgroundColor(currentDay.day.condition.text);
 }
+
 
 // Add a city to sessionStorage for recent searches
 function addCityToStorage(cityName) {
@@ -290,28 +291,3 @@ search.addEventListener('click', (event) => {
 
 // Update suggestions on page load
 window.onload = updateDropdown;
-
-
-// fetch("http://www.geoplugin.net/json.gp?")
-// .then(data => data.json())
-// .then( res => console.log(res))
-
-// function liveLocation() {
-//         fetch("http://www.geoplugin.net/json.gp?")
-//         .then(res => res.json())
-//         .then(data => {
-//             fetch(`${URL}key=${APIkey}&q=${data.geoplugin_latitude},${data.geoplugin_longitude}&days=8`)
-//             console.log()
-//             .then(res => res.json(data.geoplugin_latitude))
-//             .then(position => {
-//                 sessionStorage.setItem(data.city, JSON.stringify(position));
-//                 displayWeather(position);
-//             })
-//             .catch(error => console.error('Error fetching weather:', error));
-//         })
-//         .catch(error => {
-//             console.error('Error fetching geolocation:', error);
-//             content.innerHTML = "Unable to get your location.";
-//             console.log("not working")
-//         });
-//     }
